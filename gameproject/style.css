@@ -1,0 +1,221 @@
+.container {
+  display: grid;
+  grid-template-columns: 80px 50px 50px 50px 50px 50px 50px 50px 50px 50px 80px;
+  grid-template-rows: 80px 50px 50px 50px 50px 50px 50px 50px 50px 80px;
+  background-color: #bfdbae;
+  font-size: 12px;
+  justify-content: center;
+}
+
+.comment {
+  background-color: white;
+  grid-column: 5/8;
+  grid-row: 5/8;
+  text-align: center;
+}
+
+.playerA {
+  height: 20px;
+  width: 20px;
+  justify-self: center;
+  align-self: center;
+  /* padding-top: 3px; */
+  /* padding-left: 13px; */
+}
+
+.gameTitle {
+  grid-column: 5/8;
+  grid-row: 4/5;
+  text-align: center;
+}
+
+.roll {
+  grid-column: 6/7;
+  grid-row: 9/10;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 60px;
+}
+.playBtn {
+  grid-row: 8/9;
+  grid-column: 6/7;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 60px;
+}
+
+.restartBtn {
+  grid-row: 8/9;
+  grid-column: 6/7;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 60px;
+}
+
+.tiles {
+  background-color: #8fbc72;
+  border: solid 1px white;
+}
+
+/* .main {
+  height: 60px;
+}
+
+.right-side {
+  margin-left: 20px;
+}
+
+.left-side {
+  width: 60px;
+}
+
+.bottom {
+  margin-top: 20px;
+} */
+
+.b10 {
+  grid-column: 11/12;
+  grid-row: 2/3;
+}
+
+.c10 {
+  grid-column: 11/12;
+  grid-row: 3/4;
+}
+
+.d10 {
+  grid-column: 11/12;
+  grid-row: 4/5;
+}
+
+.e10 {
+  grid-column: 11/12;
+  grid-row: 5/6;
+}
+
+.f10 {
+  grid-column: 11/12;
+  grid-row: 6/7;
+}
+
+.g10 {
+  grid-column: 11/12;
+  grid-row: 7/8;
+}
+
+.h10 {
+  grid-column: 11/12;
+  grid-row: 8/9;
+}
+
+.i10 {
+  grid-column: 11/12;
+  grid-row: 9/10;
+}
+
+.j10 {
+  grid-column: 11/12;
+  grid-row: 10/11;
+}
+
+.a0 {
+  color: red;
+  font-size: 20px;
+  padding-top: 30px;
+  padding-left: 25px;
+}
+.b0 {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.c0 {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+
+.d0 {
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+
+.e0 {
+  grid-column: 1/2;
+  grid-row: 5/6;
+}
+
+.f0 {
+  grid-column: 1/2;
+  grid-row: 6/7;
+}
+
+.g0 {
+  grid-column: 1/2;
+  grid-row: 7/8;
+}
+
+.h0 {
+  grid-column: 1/2;
+  grid-row: 8/9;
+}
+
+.i0 {
+  grid-column: 1/2;
+  grid-row: 9/10;
+}
+
+.j0 {
+  grid-column: 1/2;
+  grid-row: 10/11;
+}
+
+.j1 {
+  grid-column: -11/-10;
+  grid-row: 10/11;
+}
+
+.j2 {
+  grid-column: -10/-9;
+  grid-row: 10/11;
+}
+
+.j3 {
+  grid-column: -9/-8;
+  grid-row: 10/11;
+}
+
+.j4 {
+  grid-column: -8/-7;
+  grid-row: 10/11;
+}
+
+.j5 {
+  grid-column: -7/-6;
+  grid-row: 10/11;
+}
+
+.j6 {
+  grid-column: -6/-5;
+  grid-row: 10/11;
+}
+
+.j7 {
+  grid-column: -5/-4;
+  grid-row: 10/11;
+}
+
+.j8 {
+  grid-column: -4/-3;
+  grid-row: 10/11;
+}
+
+.j9 {
+  grid-column: -3/-2;
+  grid-row: 10/11;
+}
