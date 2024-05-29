@@ -1,8 +1,6 @@
 // let playerB = document.querySelector(".playerB");
-// playerB = { name: "", bank: 1000, deed: 0, position: 0 };
-
-let playerA = document.querySelector(".playerA");
-
+const playerA = document.querySelector(".playerA");
+console.log(playerA);
 let playerPos = 0;
 let playerTurn = 0;
 let isGameRunning = false;
@@ -90,8 +88,8 @@ const tilesData = [
 ];
 
 const playerData = [
-  { name: playerA, bank: 1000, Deed: 0, Assest: 1000 },
-  //{ name: playerB, bank: 1000, Deed: 0, Assest: 1000 },
+  { name: playerA, bank: 1000, Deed: 0, Assest: 1000, player: 0 },
+  //{ name: playerB, bank: 1000, Deed: 0, Assest: 1000, player: 1 },
 ];
 
 const playerStat = document.querySelector(".playerStat");
@@ -106,9 +104,11 @@ function play() {
     playBtn.remove();
     a0.appendChild(playerA);
     playerPos = 0;
-    playerA.innerHTML = `<img class="playerA" src="images/m.png" alt="player piece" />`;
+    playerA.innerHTML = `<img class="playerA" src="images/super-mario.png" alt="player piece" />`;
   }
 }
+
+function changePlayer() {}
 
 // function checkPlayerTurn() {
 //   if (playerTurn === playerA) {
