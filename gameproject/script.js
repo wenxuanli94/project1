@@ -1,11 +1,15 @@
-// let playerB = document.querySelector(".playerB");
+const playerB = document.querySelector(".playerB");
 const playerA = document.querySelector(".playerA");
-console.log(playerA);
+let player = playerA;
+console.log(player);
 let playerPos = 0;
 let playerTurn = 0;
+let opponent = 1;
+console.log("playerturn", playerTurn);
+
 let isGameRunning = false;
 let turn = 0;
-// let playerTurn = playerA;
+// const payRentBtn = document.createElement("button");
 const board = document.querySelector(".container");
 const a0 = document.querySelector(".a0");
 const a1 = document.querySelector(".a1");
@@ -47,52 +51,375 @@ const a36 = document.querySelector(".a36");
 const a37 = document.querySelector(".a37");
 
 const tilesData = [
-  { tile: a0, deed: false, rent: 0, price: 100, position: 0 },
-  { tile: a1, deed: true, rent: 0, price: 100, position: 1 },
-  { tile: a2, deed: false, rent: 0, price: 100, position: 2 },
-  { tile: a3, deed: true, rent: 0, price: 100, position: 3 },
-  { tile: a4, deed: false, rent: 0, price: 100, position: 4 },
-  { tile: a5, deed: false, rent: 0, price: 100, position: 5 },
-  { tile: a6, deed: true, rent: 0, price: 100, position: 6 },
-  { tile: a7, deed: false, rent: 0, price: 100, position: 7 },
-  { tile: a8, deed: true, rent: 0, price: 100, position: 8 },
-  { tile: a9, deed: true, rent: 0, price: 100, position: 9 },
-  { tile: a10, deed: false, rent: 0, price: 100, position: 10 },
-  { tile: a11, deed: true, rent: 0, price: 100, position: 11 },
-  { tile: a12, deed: false, rent: 0, price: 100, position: 12 },
-  { tile: a13, deed: true, rent: 0, price: 100, position: 13 },
-  { tile: a14, deed: true, rent: 0, price: 100, position: 14 },
-  { tile: a15, deed: false, rent: 0, price: 100, position: 15 },
-  { tile: a16, deed: true, rent: 0, price: 100, position: 16 },
-  { tile: a17, deed: false, rent: 0, price: 100, position: 17 },
-  { tile: a18, deed: true, rent: 0, price: 100, position: 18 },
-  { tile: a19, deed: false, rent: 0, price: 100, position: 19 },
-  { tile: a20, deed: true, rent: 0, price: 100, position: 20 },
-  { tile: a21, deed: false, rent: 0, price: 100, position: 21 },
-  { tile: a22, deed: true, rent: 0, price: 100, position: 22 },
-  { tile: a23, deed: true, rent: 0, price: 100, position: 23 },
-  { tile: a24, deed: false, rent: 0, price: 100, position: 24 },
-  { tile: a25, deed: true, rent: 0, price: 100, position: 25 },
-  { tile: a26, deed: true, rent: 0, price: 100, position: 26 },
-  { tile: a27, deed: false, rent: 0, price: 100, position: 27 },
-  { tile: a28, deed: true, rent: 0, price: 100, position: 28 },
-  { tile: a29, deed: false, rent: 0, price: 100, position: 29 },
-  { tile: a30, deed: true, rent: 0, price: 100, position: 30 },
-  { tile: a31, deed: true, rent: 0, price: 100, position: 31 },
-  { tile: a32, deed: false, rent: 0, price: 100, position: 32 },
-  { tile: a33, deed: true, rent: 0, price: 100, position: 33 },
-  { tile: a34, deed: false, rent: 0, price: 100, position: 34 },
-  { tile: a35, deed: false, rent: 0, price: 100, position: 35 },
-  { tile: a36, deed: true, rent: 0, price: 100, position: 36 },
-  { tile: a37, deed: true, rent: 0, price: 100, position: 37 },
+  {
+    tile: a0,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 0,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a1,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 1,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a2,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 2,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a3,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 3,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a4,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 4,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a5,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 5,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a6,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 6,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a7,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 7,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a8,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 8,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a9,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 9,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a10,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 10,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a11,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 11,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a12,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 12,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a13,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 13,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a14,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 14,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a15,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 15,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a16,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 16,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a17,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 17,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a18,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 18,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a19,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 19,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a20,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 20,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a21,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 21,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a22,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 22,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a23,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 23,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a24,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 24,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a25,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 25,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a26,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 26,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a27,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 27,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a28,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 28,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a29,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 29,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a30,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 30,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a31,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 31,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a32,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 32,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a33,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 33,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a34,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 34,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a35,
+    deed: false,
+    rent: 0,
+    price: 100,
+    position: 35,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a36,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 36,
+    ownBy: "",
+    color: "",
+  },
+  {
+    tile: a37,
+    deed: true,
+    rent: 50,
+    price: 100,
+    position: 37,
+    ownBy: "",
+    color: "",
+  },
 ];
 
 const playerData = [
-  { name: playerA, bank: 1000, Deed: 0, Assest: 1000, player: 0 },
-  //{ name: playerB, bank: 1000, Deed: 0, Assest: 1000, player: 1 },
+  {
+    idx: 0,
+    name: playerA,
+    bank: 10000,
+    Deed: 0,
+    Asset: 1000,
+    player: 0,
+    startingStats: "Bank: 1000 Property: 0",
+    color: "red",
+  },
+  {
+    indx: 1,
+    name: playerB,
+    bank: 10000,
+    Deed: 0,
+    Assest: 1000,
+    player: 1,
+    startingStats: "Bank: 1000 Property: 0",
+    color: "yellow",
+  },
 ];
-
-const playerStat = document.querySelector(".playerStat");
+console.log(playerData[playerTurn].name);
+const playerBStat = document.querySelector(".playerBStat");
+const playerAStat = document.querySelector(".playerAStat");
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -102,32 +429,36 @@ function play() {
   if (!isGameRunning) {
     isGameRunning = true;
     playBtn.remove();
-    a0.appendChild(playerA);
+    a0.appendChild(playerA, playerB);
+
     playerPos = 0;
-    playerA.innerHTML = `<img class="playerA" src="images/super-mario.png" alt="player piece" />`;
+
+    playerA.innerHTML = `<img class="playerA" src="images/m.png" alt="player piece" />`;
+    playerB.innerHTML = `<img class="playerB" src="images/pikachu.png" alt="player piece" />`;
+
+    playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+    playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
   }
 }
 
-function changePlayer() {}
-
-// function checkPlayerTurn() {
-//   if (playerTurn === playerA) {
-//     a0.appendChild(playerA);
-//     playerA.innerText = "A";
-//     playerTurn = playerB;
-//   } else if (playerTurn === playerB) {
-//     a0.appendChild(playerB);
-//     playerB.innerText = "B";
-//     playerTurn = playerA;
-//     a0.appendChild(playerB);
-//   }
-// }
+function checkPlayerTurn() {
+  if (playerTurn === 0) {
+    console.log("it is player A turn");
+    playerTurn += 1;
+    opponent -= 1;
+  } else if (playerTurn === 1) {
+    console.log("it is player B turn");
+    playerTurn -= 1;
+    opponent += 1;
+  }
+}
 
 //Roll Dice Function
-function rollDice() {
+function rollDice(player) {
   // const diceRoll = 1;
   // //Generate Random Dice
-  const diceRoll = Math.floor(Math.random() * 6 + 1);
+  const diceRoll = Math.floor(Math.random() * 12 + 1);
   console.log("Dice rolled", diceRoll);
 
   let newPosition = playerPos + diceRoll;
@@ -135,32 +466,71 @@ function rollDice() {
     newPosition -= tilesData.length;
     console.log("Pass Go");
   }
-  tilesData[newPosition].tile.appendChild(playerA);
+  tilesData[newPosition].tile.appendChild(playerData[playerTurn].name);
+  console.log(playerData[playerTurn].name);
   playerPos = newPosition;
-  playerA.innerHTML = `<img class="playerA" src="images/m.png" alt="player piece" />`;
+  playerData[playerTurn].position = playerPos;
+  console.log("playerdata", (playerData[playerTurn].position = playerPos));
+  console.log("playerdata", playerData[playerTurn]);
+  // playerA.innerHTML = `<img class="playerA" src="images/pikachu.png" alt="player piece" />`;
 
   console.log(tilesData.length);
   console.log("New Position: " + newPosition);
   console.log("current playerPos", playerPos);
-  console.log(tilesData[newPosition].position);
+  console.log("tiles info", tilesData[newPosition]);
 }
 console.log(tilesData[0].position);
 // player will get to buy property
 function buyProperty() {
+  // checkPlayerTurn();
+  if (tilesData[playerPos].deed === "taken") {
+    return;
+  }
   if (
-    playerPos === tilesData[playerPos].position &&
-    tilesData[playerPos].deed
+    tilesData[playerPos].deed === true &&
+    playerData[playerTurn].bank >= tilesData[playerPos].price
   ) {
     comment.innerText = "You have purchased this property!";
     console.log("this property is available");
-    tilesData[playerPos].tile.style.backgroundColor = "red";
-    tilesData[playerPos].deed = "false";
+    tilesData[playerPos].tile.style.backgroundColor =
+      playerData[playerTurn].color;
+    tilesData[playerPos].color = playerData[playerTurn].color;
+    tilesData[playerPos].deed = "taken";
+    tilesData[playerPos].ownBy = playerTurn;
+    console.log("check if own by is updated", tilesData[playerPos]);
     console.log(tilesData[playerPos].deed);
     setTimeout(clearText, 1000);
-    playerStat.innerText = ``;
     playerData[playerTurn].Deed++;
     playerData[playerTurn].bank -= tilesData[playerPos].price;
-    playerStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+    tilesData[playerPos].price = 0;
+    if (playerTurn === 0) {
+      playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+    } else if (playerTurn === 1) {
+      playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+    }
+  }
+}
+
+// player will pay rent when landing on taken property
+function payRent() {
+  if (
+    tilesData[playerPos].deed === "taken" &&
+    tilesData[playerPos].ownBy !== playerData[playerTurn].idx
+  ) {
+    console.log("player turn idx", playerTurn);
+    console.log("opponent idx", opponent);
+    console.log("playerdata", playerData);
+    playerData[playerTurn].bank -= tilesData[playerPos].rent;
+    playerData[opponent].bank += tilesData[playerPos].rent;
+    console.log("playerdata", playerData);
+
+    playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+    playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+    // payRentBtn.classList.add(".payRent");
+    // payRent.innerText = "Pay rent";
+    // board.appendChild(payRentBtn);
   }
 }
 
@@ -173,7 +543,7 @@ const restartBtn = document.createElement("button");
 
 function turnCheck() {
   turn++;
-  if (turn >= 60) {
+  if (turn >= 1000) {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
@@ -197,14 +567,14 @@ playBtn.addEventListener("click", () => {
   play();
 });
 
-// playBtn.addEventListener("click", () => {
-//   checkPlayerTurn();
-// });
+roll.addEventListener("click", () => checkPlayerTurn());
 
 roll.addEventListener("click", () => rollDice());
 
 roll.addEventListener("click", () => buyProperty());
 
 roll.addEventListener("click", () => turnCheck());
+
+roll.addEventListener("click", () => payRent());
 
 restartBtn.addEventListener("click", () => restartGame());
