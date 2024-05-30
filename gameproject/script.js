@@ -50,6 +50,9 @@ const a35 = document.querySelector(".a35");
 const a36 = document.querySelector(".a36");
 const a37 = document.querySelector(".a37");
 
+const playerBStat = document.querySelector(".playerBStat");
+const playerAStat = document.querySelector(".playerAStat");
+
 const tilesData = [
   {
     tile: a0,
@@ -403,7 +406,7 @@ const playerData = [
     Deed: 0,
     Asset: 1000,
     player: 0,
-    startingStats: "Bank: 1000 Property: 0",
+    startingStats: playerAStat,
     color: "red",
   },
   {
@@ -413,13 +416,11 @@ const playerData = [
     Deed: 0,
     Assest: 1000,
     player: 1,
-    startingStats: "Bank: 1000 Property: 0",
+    startingStats: playerBStat,
     color: "yellow",
   },
 ];
 console.log(playerData[playerTurn].name);
-const playerBStat = document.querySelector(".playerBStat");
-const playerAStat = document.querySelector(".playerAStat");
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -482,10 +483,6 @@ function rollDice(player) {
 console.log(tilesData[0].position);
 // player will get to buy property
 function buyProperty() {
-  // checkPlayerTurn();
-  if (tilesData[playerPos].deed === "taken") {
-    return;
-  }
   if (
     tilesData[playerPos].deed === true &&
     playerData[playerTurn].bank >= tilesData[playerPos].price
@@ -496,43 +493,76 @@ function buyProperty() {
       playerData[playerTurn].color;
     tilesData[playerPos].color = playerData[playerTurn].color;
     tilesData[playerPos].deed = "taken";
-    tilesData[playerPos].ownBy = playerTurn;
+    tilesData[playerPos].ownBy = playerData[playerTurn].name;
     console.log("check if own by is updated", tilesData[playerPos]);
     console.log(tilesData[playerPos].deed);
     setTimeout(clearText, 1000);
     playerData[playerTurn].Deed++;
     playerData[playerTurn].bank -= tilesData[playerPos].price;
     tilesData[playerPos].price = 0;
-    if (playerTurn === 0) {
-      playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-    } else if (playerTurn === 1) {
-      playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-    }
+
+    playerData[
+      playerTurn
+    ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
   }
 }
 
-// player will pay rent when landing on taken property
+function checkIfReadyToRent() {
+  if (tilesData[playerPos].deed === "taken") {
+    tilesData[playerPos].deed = "ready to rent";
+  } else if (tilesData[playerPos].deed === "ready to rent") {
+    payRent();
+  }
+}
+
 function payRent() {
   if (
-    tilesData[playerPos].deed === "taken" &&
-    tilesData[playerPos].ownBy !== playerData[playerTurn].idx
+    tilesData[playerPos].ownBy !== playerA &&
+    playerData[0].bank >= tilesData[playerPos].rent
   ) {
-    console.log("player turn idx", playerTurn);
-    console.log("opponent idx", opponent);
-    console.log("playerdata", playerData);
-    playerData[playerTurn].bank -= tilesData[playerPos].rent;
-    playerData[opponent].bank += tilesData[playerPos].rent;
-    console.log("playerdata", playerData);
-
-    playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-
-    playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-
-    // payRentBtn.classList.add(".payRent");
-    // payRent.innerText = "Pay rent";
-    // board.appendChild(payRentBtn);
+    console.log("before transaction", playerData);
+    playerData[0].bank -= tilesData[playerPos].rent;
+    playerData[1].bank += tilesData[playerPos].rent;
+    console.log("after transaction", playerData);
+    playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
+    playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
+  } else if (
+    tilesData[playerPos].ownBy !== playerB &&
+    playerData[1].bank >= tilesData[playerPos].rent
+  ) {
+    console.log("before transaction", playerData);
+    playerData[1].bank -= tilesData[playerPos].rent;
+    playerData[0].bank += tilesData[playerPos].rent;
+    console.log("after transaction", playerData);
+    playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
+    playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
+  } else {
+    console.log("You do not have enough to cash to pay rent");
   }
 }
+
+// // player will pay rent when landing on taken property
+// function payRent() {
+//   if (
+//     tilesData[playerPos].deed === "taken" &&
+//     tilesData[playerPos].ownBy !== playerData[playerTurn].idx
+//   ) {
+//     console.log("player turn idx", playerTurn);
+//     console.log("opponent idx", opponent);
+//     console.log("playerdata", playerData);
+//     playerData[playerTurn].bank -= tilesData[playerPos].rent;
+//     playerData[opponent].bank += tilesData[playerPos].rent;
+//     console.log("playerdata", playerData);
+
+//     playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+//     playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+// payRentBtn.classList.add(".payRent");
+// payRent.innerText = "Pay rent";
+// board.appendChild(payRentBtn);
+//}
+//}
 
 function clearText() {
   comment.innerText = "";
@@ -575,6 +605,6 @@ roll.addEventListener("click", () => buyProperty());
 
 roll.addEventListener("click", () => turnCheck());
 
-roll.addEventListener("click", () => payRent());
+roll.addEventListener("click", () => checkIfReadyToRent());
 
 restartBtn.addEventListener("click", () => restartGame());
