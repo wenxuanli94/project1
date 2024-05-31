@@ -153,7 +153,7 @@ const tilesData = [
   },
   {
     tile: a10,
-    deed: false,
+    deed: "jailTime",
     rent: 0,
     price: 100,
     position: 10,
@@ -472,6 +472,8 @@ const win3property = [
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
+const fineBtn = document.querySelector(".fineBtn");
+const passBtn = document.querySelector(".passBtn");
 
 //game starts
 function play() {
@@ -508,17 +510,23 @@ function checkPlayerTurn() {
 
 //Roll Dice Function
 function rollDice() {
+  if (playerData[playerTurn].jailTerm > 0) {
+    let dice1 = Math.floor(Math.random() * 6 + 1);
+    let dice2 = Math.floor(Math.random() * 6 + 1);
+    if (dice1 === dice2) {
+      comment.innerText = "You are free to go next turn!";
+      playerData[playerTurn].jailTerm = 0;
+      playerData[playerTurn].convicted = false;
+    }
+    return;
+  }
   const diceRoll = 1;
   // //Generate Random Dice
   //const diceRoll = Math.floor(Math.random() * 12 + 1);
   console.log("Dice rolled", diceRoll);
   playerPos = playerData[playerTurn].position + diceRoll;
-  //playerData[playerTurn].position = playerPos;
-  //let newPosition = playerData[playerTurn].position;
-  //let newPosition = 0 + diceRoll;
   if (playerPos > tilesData.length - 1) {
     playerPos -= tilesData.length;
-    // newPosition = playerPos;
     console.log("Pass Go");
   }
 
@@ -594,6 +602,58 @@ function payRent() {
 function clearText() {
   comment.innerText = "";
 }
+function sentToJail() {
+  a29.appendChild(playerData[playerTurn].name);
+}
+function goJail() {
+  if (
+    tilesData[playerPos].deed === "jailTime" &&
+    playerData[playerTurn].position === tilesData[playerPos].position
+  ) {
+    comment.innerText = "You are going to jail";
+    setTimeout(sentToJail, 1000);
+    setTimeout(clearText, 1500);
+
+    //a29.appendChild(playerData[playerTurn].name);
+    playerData[playerTurn].convicted = true;
+    playerData[playerTurn].jailTerm = 3;
+    playerData[playerTurn].position = 29;
+  }
+}
+
+function fine() {
+  if (playerData[opponent].bank >= 50) {
+    playerData[opponent].bank -= 50;
+  } else {
+    comment.innerText = "You do not have enough cash, you have to pass";
+  }
+}
+function pass() {
+  // if (playerData[opponent.name]) {
+  checkPlayerTurn();
+  board.appendChild(roll);
+  fineBtn.remove();
+  passBtn.remove();
+
+  // }
+}
+
+function checkJailTerm() {
+  if (playerData[playerTurn].jailTerm > 0) {
+    playerData[playerTurn].jailTerm--;
+    comment.innerText = "You are still in jail";
+    setInterval(clearText, 1000);
+
+    fineBtn.style.backgroundColor = "red";
+    fineBtn.style.font = "white";
+    fineBtn.innerText = "Pay Fine";
+    passBtn.style.backgroundColor = "red";
+    passBtn.style.font = "white";
+    passBtn.innerText = "Pass";
+  } else if (playerData[playerTurn].jailTerm === 0) {
+    playerData[playerTurn].convicted = false;
+  }
+}
 
 //check number of check and end game
 const restartBtn = document.createElement("button");
@@ -622,9 +682,16 @@ playBtn.addEventListener("click", () => {
   play();
 });
 
+roll.addEventListener("click", () => checkJailTerm());
+
+fineBtn.addEventListener("click", () => fine());
+passBtn.addEventListener("click", () => pass());
+
 roll.addEventListener("click", () => checkPlayerTurn());
 
 roll.addEventListener("click", () => rollDice());
+
+roll.addEventListener("click", () => goJail());
 
 roll.addEventListener("click", () => buyProperty());
 

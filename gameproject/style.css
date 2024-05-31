@@ -30,7 +30,7 @@
 }
 
 .comment {
-  background-color: white;
+  background-color: #bfdbae;
   grid-column: 6/9;
   grid-row: 5/8;
   text-align: center;
@@ -305,6 +305,28 @@
   border-radius: 10px;
   height: 30px;
   width: 60px;
+}
+
+.fineBtn {
+  grid-row: 8/9;
+  grid-column: 6/7;
+  background-color: #bfdbae;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 70px;
+  border: none;
+}
+
+.passBtn {
+  grid-row: 8/9;
+  grid-column: 8/9;
+  background-color: #bfdbae;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 70px;
+  border: none;
 }
 
 .restartBtn {
