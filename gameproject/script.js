@@ -1,12 +1,9 @@
 const playerB = document.querySelector(".playerB");
 const playerA = document.querySelector(".playerA");
-let player = playerA;
-console.log(player);
+//let player = playerA;
 let playerPos = 0;
-let playerTurn = 0;
-let opponent = 1;
-console.log("playerturn", playerTurn);
-
+let playerTurn = 1;
+let opponent = 0;
 let isGameRunning = false;
 let turn = 0;
 // const payRentBtn = document.createElement("button");
@@ -61,6 +58,7 @@ const tilesData = [
     price: 100,
     position: 0,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -70,6 +68,7 @@ const tilesData = [
     price: 100,
     position: 1,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -79,6 +78,7 @@ const tilesData = [
     price: 100,
     position: 2,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -88,6 +88,7 @@ const tilesData = [
     price: 100,
     position: 3,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -97,6 +98,7 @@ const tilesData = [
     price: 100,
     position: 4,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -106,6 +108,7 @@ const tilesData = [
     price: 100,
     position: 5,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -115,6 +118,7 @@ const tilesData = [
     price: 100,
     position: 6,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -124,6 +128,7 @@ const tilesData = [
     price: 100,
     position: 7,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -133,6 +138,7 @@ const tilesData = [
     price: 100,
     position: 8,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -142,6 +148,7 @@ const tilesData = [
     price: 100,
     position: 9,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -151,6 +158,7 @@ const tilesData = [
     price: 100,
     position: 10,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -160,6 +168,7 @@ const tilesData = [
     price: 100,
     position: 11,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -169,6 +178,7 @@ const tilesData = [
     price: 100,
     position: 12,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -178,6 +188,7 @@ const tilesData = [
     price: 100,
     position: 13,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -187,6 +198,7 @@ const tilesData = [
     price: 100,
     position: 14,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -196,6 +208,7 @@ const tilesData = [
     price: 100,
     position: 15,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -205,6 +218,7 @@ const tilesData = [
     price: 100,
     position: 16,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -214,6 +228,7 @@ const tilesData = [
     price: 100,
     position: 17,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -223,6 +238,7 @@ const tilesData = [
     price: 100,
     position: 18,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -232,6 +248,7 @@ const tilesData = [
     price: 100,
     position: 19,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -241,6 +258,7 @@ const tilesData = [
     price: 100,
     position: 20,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -250,6 +268,7 @@ const tilesData = [
     price: 100,
     position: 21,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -259,6 +278,7 @@ const tilesData = [
     price: 100,
     position: 22,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -268,6 +288,7 @@ const tilesData = [
     price: 100,
     position: 23,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -277,6 +298,7 @@ const tilesData = [
     price: 100,
     position: 24,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -286,6 +308,7 @@ const tilesData = [
     price: 100,
     position: 25,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -295,6 +318,7 @@ const tilesData = [
     price: 100,
     position: 26,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -304,6 +328,7 @@ const tilesData = [
     price: 100,
     position: 27,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -313,6 +338,7 @@ const tilesData = [
     price: 100,
     position: 28,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -322,6 +348,7 @@ const tilesData = [
     price: 100,
     position: 29,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -331,6 +358,7 @@ const tilesData = [
     price: 100,
     position: 30,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -340,6 +368,7 @@ const tilesData = [
     price: 100,
     position: 31,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -349,6 +378,7 @@ const tilesData = [
     price: 100,
     position: 32,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -358,6 +388,7 @@ const tilesData = [
     price: 100,
     position: 33,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -367,6 +398,7 @@ const tilesData = [
     price: 100,
     position: 34,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -376,6 +408,7 @@ const tilesData = [
     price: 100,
     position: 35,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -385,6 +418,7 @@ const tilesData = [
     price: 100,
     position: 36,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
   {
@@ -394,6 +428,7 @@ const tilesData = [
     price: 100,
     position: 37,
     ownBy: "",
+    readyToRent: "no",
     color: "",
   },
 ];
@@ -408,6 +443,7 @@ const playerData = [
     player: 0,
     startingStats: playerAStat,
     color: "red",
+    position: 0,
   },
   {
     indx: 1,
@@ -418,9 +454,9 @@ const playerData = [
     player: 1,
     startingStats: playerBStat,
     color: "yellow",
+    position: 0,
   },
 ];
-console.log(playerData[playerTurn].name);
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -428,6 +464,7 @@ const roll = document.querySelector(".roll");
 //game starts
 function play() {
   if (!isGameRunning) {
+    console.log(`game starts`);
     isGameRunning = true;
     playBtn.remove();
     a0.appendChild(playerA, playerB);
@@ -440,53 +477,54 @@ function play() {
     playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
 
     playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+
+    console.log(`${playerData[playerTurn].name} starts first`);
   }
 }
 
 function checkPlayerTurn() {
   if (playerTurn === 0) {
-    console.log("it is player A turn");
+    console.log("it is player B turn");
     playerTurn += 1;
     opponent -= 1;
   } else if (playerTurn === 1) {
-    console.log("it is player B turn");
+    console.log("it is player A turn");
     playerTurn -= 1;
     opponent += 1;
   }
 }
 
 //Roll Dice Function
-function rollDice(player) {
+function rollDice() {
   // const diceRoll = 1;
   // //Generate Random Dice
   const diceRoll = Math.floor(Math.random() * 12 + 1);
   console.log("Dice rolled", diceRoll);
-
-  let newPosition = playerPos + diceRoll;
-  if (newPosition > tilesData.length - 1) {
-    newPosition -= tilesData.length;
+  playerPos = playerData[playerTurn].position + diceRoll;
+  //playerData[playerTurn].position = playerPos;
+  //let newPosition = playerData[playerTurn].position;
+  //let newPosition = 0 + diceRoll;
+  if (playerPos > tilesData.length - 1) {
+    playerPos -= tilesData.length;
+    // newPosition = playerPos;
     console.log("Pass Go");
   }
-  tilesData[newPosition].tile.appendChild(playerData[playerTurn].name);
-  console.log(playerData[playerTurn].name);
-  playerPos = newPosition;
-  playerData[playerTurn].position = playerPos;
-  console.log("playerdata", (playerData[playerTurn].position = playerPos));
-  console.log("playerdata", playerData[playerTurn]);
-  // playerA.innerHTML = `<img class="playerA" src="images/pikachu.png" alt="player piece" />`;
 
-  console.log(tilesData.length);
-  console.log("New Position: " + newPosition);
-  console.log("current playerPos", playerPos);
-  console.log("tiles info", tilesData[newPosition]);
+  tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+  //playerPos = playerData[playerTurn].position;
+  //playerPos = newPosition;
+  playerData[playerTurn].position = playerPos;
+  console.log(playerData[playerTurn]);
+  console.log(tilesData[playerPos]);
 }
-console.log(tilesData[0].position);
+
 // player will get to buy property
 function buyProperty() {
   if (
     tilesData[playerPos].deed === true &&
     playerData[playerTurn].bank >= tilesData[playerPos].price
   ) {
+    console.log("this should only appear when property is empty");
     comment.innerText = "You have purchased this property!";
     console.log("this property is available");
     tilesData[playerPos].tile.style.backgroundColor =
@@ -495,6 +533,7 @@ function buyProperty() {
     tilesData[playerPos].deed = "taken";
     tilesData[playerPos].ownBy = playerData[playerTurn].name;
     console.log("check if own by is updated", tilesData[playerPos]);
+    console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos].deed);
     setTimeout(clearText, 1000);
     playerData[playerTurn].Deed++;
@@ -509,60 +548,60 @@ function buyProperty() {
 
 function checkIfReadyToRent() {
   if (tilesData[playerPos].deed === "taken") {
+    console.log("this is checking if property is taken");
     tilesData[playerPos].deed = "ready to rent";
-  } else if (tilesData[playerPos].deed === "ready to rent") {
+  } else if (
+    tilesData[playerPos].deed === "ready to rent" &&
+    playerData[playerTurn].name !== tilesData[playerPos].ownBy
+  ) {
     payRent();
   }
 }
 
 function payRent() {
-  if (
-    tilesData[playerPos].ownBy !== playerA &&
-    playerData[0].bank >= tilesData[playerPos].rent
-  ) {
-    console.log("before transaction", playerData);
-    playerData[0].bank -= tilesData[playerPos].rent;
-    playerData[1].bank += tilesData[playerPos].rent;
-    console.log("after transaction", playerData);
-    playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
-    playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
-  } else if (
-    tilesData[playerPos].ownBy !== playerB &&
-    playerData[1].bank >= tilesData[playerPos].rent
-  ) {
-    console.log("before transaction", playerData);
-    playerData[1].bank -= tilesData[playerPos].rent;
-    playerData[0].bank += tilesData[playerPos].rent;
-    console.log("after transaction", playerData);
-    playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
-    playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
-  } else {
-    console.log("You do not have enough to cash to pay rent");
-  }
+  console.log("before transaction", playerData);
+  // console.log("this property is own by", tilesData[playerPos].ownBy);
+  playerData[playerTurn].bank -= tilesData[playerPos].rent;
+  playerData[opponent].bank += tilesData[playerPos].rent;
+  console.log("after transaction", playerData);
+  playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
+  playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
 }
-
-// // player will pay rent when landing on taken property
 // function payRent() {
 //   if (
-//     tilesData[playerPos].deed === "taken" &&
-//     tilesData[playerPos].ownBy !== playerData[playerTurn].idx
+//     tilesData[playerPos].ownBy !== playerA &&
+//     playerData[0].bank >= tilesData[playerPos].rent
 //   ) {
-//     console.log("player turn idx", playerTurn);
-//     console.log("opponent idx", opponent);
-//     console.log("playerdata", playerData);
-//     playerData[playerTurn].bank -= tilesData[playerPos].rent;
-//     playerData[opponent].bank += tilesData[playerPos].rent;
-//     console.log("playerdata", playerData);
+//     console.log(
+//       `this property is owned by ${tilesData[playerPos].ownBy}, ${playerData[playerTurn].player} is paying ${playerData[opponent].name} rent`
+//     );
+//     console.log("before transaction", playerData);
+//     console.log("this property is own by", tilesData[playerPos].ownBy);
+//     playerData[0].bank -= tilesData[playerPos].rent;
+//     playerData[1].bank += tilesData[playerPos].rent;
+//     console.log("after transaction", playerData);
+//     playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
+//     playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
+//   } else if (
+//     tilesData[playerPos].ownBy !== playerB &&
+//     playerData[1].bank >= tilesData[playerPos].rent
+//   ) {
+//     console.log(
+//       `this property is owned by ${tilesData[playerPos].ownBy}, ${playerData[playerTurn].player} is paying ${playerData[opponent].name} rent`
+//     );
+//     console.log("before transaction", playerData);
+//     playerData[1].bank -= tilesData[playerPos].rent;
+//     playerData[0].bank += tilesData[playerPos].rent;
+//     console.log("after transaction", playerData);
+//     playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
+//     playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
+//   } else {
+//     console.log(
+//       `${playerData[playerTurn].name} do not have enough to cash to pay rent`
+//     );
+//   }
 
-//     playerAStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-
-//     playerBStat.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-
-// payRentBtn.classList.add(".payRent");
-// payRent.innerText = "Pay rent";
-// board.appendChild(payRentBtn);
-//}
-//}
+// }
 
 function clearText() {
   comment.innerText = "";
@@ -581,8 +620,6 @@ function turnCheck() {
     roll.remove();
     isGameRunning = false;
   }
-  console.log("turn", turn);
-  console.log(isGameRunning);
 }
 
 function passGo() {}
