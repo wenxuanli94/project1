@@ -437,9 +437,9 @@ const playerData = [
   {
     idx: 0,
     name: playerA,
-    bank: 10000,
+    bank: 100,
     Deed: 0,
-    Asset: 1000,
+    Asset: 100,
     player: 0,
     startingStats: playerAStat,
     color: "red",
@@ -448,7 +448,7 @@ const playerData = [
   {
     indx: 1,
     name: playerB,
-    bank: 10000,
+    bank: 100,
     Deed: 0,
     Assest: 1000,
     player: 1,
@@ -457,6 +457,18 @@ const playerData = [
     position: 0,
   },
 ];
+
+const win3property = [
+  [a1, a3],
+  [a6, a8, a9],
+  [a11, a13, a14],
+  [a16, a18],
+  [a20, a22, a23],
+  [a25, a26, a28],
+  [a30, a31, a33],
+  [a36, a37],
+];
+
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -496,9 +508,9 @@ function checkPlayerTurn() {
 
 //Roll Dice Function
 function rollDice() {
-  // const diceRoll = 1;
+  const diceRoll = 1;
   // //Generate Random Dice
-  const diceRoll = Math.floor(Math.random() * 12 + 1);
+  //const diceRoll = Math.floor(Math.random() * 12 + 1);
   console.log("Dice rolled", diceRoll);
   playerPos = playerData[playerTurn].position + diceRoll;
   //playerData[playerTurn].position = playerPos;
@@ -535,7 +547,7 @@ function buyProperty() {
     console.log("check if own by is updated", tilesData[playerPos]);
     console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos].deed);
-    setTimeout(clearText, 1000);
+    setTimeout(clearText, 1500);
     playerData[playerTurn].Deed++;
     playerData[playerTurn].bank -= tilesData[playerPos].price;
     tilesData[playerPos].price = 0;
@@ -543,6 +555,12 @@ function buyProperty() {
     playerData[
       playerTurn
     ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+  } else if (
+    tilesData[playerPos].deed === true &&
+    playerData[playerTurn].bank < tilesData[playerPos].price
+  ) {
+    comment.innerText = "You do not have enough purchase this property";
+    setTimeout(clearText, 1500);
   }
 }
 
@@ -550,6 +568,9 @@ function checkIfReadyToRent() {
   if (tilesData[playerPos].deed === "taken") {
     console.log("this is checking if property is taken");
     tilesData[playerPos].deed = "ready to rent";
+  } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
+    comment.innerText = "You do not have enough to pay rent";
+    clearTimeout(clearText, 1500);
   } else if (
     tilesData[playerPos].deed === "ready to rent" &&
     playerData[playerTurn].name !== tilesData[playerPos].ownBy
@@ -566,42 +587,9 @@ function payRent() {
   console.log("after transaction", playerData);
   playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
   playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
+  comment.innerText = "You have paid rent";
+  setTimeout(clearText, 1500);
 }
-// function payRent() {
-//   if (
-//     tilesData[playerPos].ownBy !== playerA &&
-//     playerData[0].bank >= tilesData[playerPos].rent
-//   ) {
-//     console.log(
-//       `this property is owned by ${tilesData[playerPos].ownBy}, ${playerData[playerTurn].player} is paying ${playerData[opponent].name} rent`
-//     );
-//     console.log("before transaction", playerData);
-//     console.log("this property is own by", tilesData[playerPos].ownBy);
-//     playerData[0].bank -= tilesData[playerPos].rent;
-//     playerData[1].bank += tilesData[playerPos].rent;
-//     console.log("after transaction", playerData);
-//     playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
-//     playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
-//   } else if (
-//     tilesData[playerPos].ownBy !== playerB &&
-//     playerData[1].bank >= tilesData[playerPos].rent
-//   ) {
-//     console.log(
-//       `this property is owned by ${tilesData[playerPos].ownBy}, ${playerData[playerTurn].player} is paying ${playerData[opponent].name} rent`
-//     );
-//     console.log("before transaction", playerData);
-//     playerData[1].bank -= tilesData[playerPos].rent;
-//     playerData[0].bank += tilesData[playerPos].rent;
-//     console.log("after transaction", playerData);
-//     playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
-//     playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
-//   } else {
-//     console.log(
-//       `${playerData[playerTurn].name} do not have enough to cash to pay rent`
-//     );
-//   }
-
-// }
 
 function clearText() {
   comment.innerText = "";
@@ -612,7 +600,7 @@ const restartBtn = document.createElement("button");
 
 function turnCheck() {
   turn++;
-  if (turn >= 1000) {
+  if (turn >= 100) {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
