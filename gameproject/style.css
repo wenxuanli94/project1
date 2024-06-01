@@ -309,12 +309,12 @@
 
 .fineBtn {
   grid-row: 8/9;
-  grid-column: 6/7;
+  grid-column: 7/8;
   background-color: #bfdbae;
   color: white;
   border-radius: 10px;
   height: 30px;
-  width: 70px;
+  width: 60px;
   border: none;
 }
 

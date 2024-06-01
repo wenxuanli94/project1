@@ -437,7 +437,7 @@ const playerData = [
   {
     idx: 0,
     name: playerA,
-    bank: 100,
+    bank: 1500,
     Deed: 0,
     Asset: 100,
     player: 0,
@@ -448,7 +448,7 @@ const playerData = [
   {
     indx: 1,
     name: playerB,
-    bank: 100,
+    bank: 1500,
     Deed: 0,
     Assest: 1000,
     player: 1,
@@ -509,33 +509,34 @@ function checkPlayerTurn() {
 }
 
 //Roll Dice Function
+let dice1 = 0;
+let dice2 = 0;
 function rollDice() {
-  if (playerData[playerTurn].jailTerm > 0) {
-    let dice1 = Math.floor(Math.random() * 6 + 1);
-    let dice2 = Math.floor(Math.random() * 6 + 1);
-    if (dice1 === dice2) {
-      comment.innerText = "You are free to go next turn!";
-      playerData[playerTurn].jailTerm = 0;
-      playerData[playerTurn].convicted = false;
-    }
-    return;
-  }
-  const diceRoll = 1;
-  // //Generate Random Dice
-  //const diceRoll = Math.floor(Math.random() * 12 + 1);
-  console.log("Dice rolled", diceRoll);
-  playerPos = playerData[playerTurn].position + diceRoll;
-  if (playerPos > tilesData.length - 1) {
-    playerPos -= tilesData.length;
-    console.log("Pass Go");
-  }
+  //Generate Random Dice
 
-  tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
-  //playerPos = playerData[playerTurn].position;
-  //playerPos = newPosition;
-  playerData[playerTurn].position = playerPos;
-  console.log(playerData[playerTurn]);
-  console.log(tilesData[playerPos]);
+  //const diceRoll = 1;
+  dice1 = Math.floor(Math.random() * 6 + 1);
+  dice2 = Math.floor(Math.random() * 6 + 1);
+  console.log("Dice rolled", dice1, dice2);
+}
+
+function movePlayers() {
+  if (playerData[playerTurn].convicted) {
+    return;
+  } else if (!playerData[playerTurn].convicted) {
+    playerPos = playerData[playerTurn].position + dice1 + dice2;
+    if (playerPos > tilesData.length - 1) {
+      playerPos -= tilesData.length;
+      console.log("Pass Go");
+    }
+
+    tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+    playerData[playerTurn].position = playerPos;
+    goJail();
+
+    console.log(playerData[playerTurn]);
+    console.log(tilesData[playerPos]);
+  }
 }
 
 // player will get to buy property
@@ -578,7 +579,7 @@ function checkIfReadyToRent() {
     tilesData[playerPos].deed = "ready to rent";
   } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
     comment.innerText = "You do not have enough to pay rent";
-    clearTimeout(clearText, 1500);
+    setTimeout(clearText, 1500);
   } else if (
     tilesData[playerPos].deed === "ready to rent" &&
     playerData[playerTurn].name !== tilesData[playerPos].ownBy
@@ -588,11 +589,8 @@ function checkIfReadyToRent() {
 }
 
 function payRent() {
-  console.log("before transaction", playerData);
-  // console.log("this property is own by", tilesData[playerPos].ownBy);
   playerData[playerTurn].bank -= tilesData[playerPos].rent;
   playerData[opponent].bank += tilesData[playerPos].rent;
-  console.log("after transaction", playerData);
   playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
   playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
   comment.innerText = "You have paid rent";
@@ -614,44 +612,58 @@ function goJail() {
     setTimeout(sentToJail, 1000);
     setTimeout(clearText, 1500);
 
-    //a29.appendChild(playerData[playerTurn].name);
     playerData[playerTurn].convicted = true;
-    playerData[playerTurn].jailTerm = 3;
+    playerData[playerTurn].jailTerm = 4;
     playerData[playerTurn].position = 29;
   }
 }
 
-function fine() {
-  if (playerData[opponent].bank >= 50) {
-    playerData[opponent].bank -= 50;
-  } else {
-    comment.innerText = "You do not have enough cash, you have to pass";
-  }
-}
-function pass() {
-  // if (playerData[opponent.name]) {
-  checkPlayerTurn();
-  board.appendChild(roll);
-  fineBtn.remove();
-  passBtn.remove();
+// function fine() {
+//   if (playerData[opponent].bank >= 50) {
+//     playerData[opponent].bank -= 50;
+//   } else {
+//     comment.innerText = "You do not have enough cash, you have to pass";
+//   }
+// }
 
-  // }
-}
-
+//check if player is convicted
 function checkJailTerm() {
-  if (playerData[playerTurn].jailTerm > 0) {
+  if (playerData[playerTurn].jailTerm > 0 && dice1 !== dice2) {
     playerData[playerTurn].jailTerm--;
     comment.innerText = "You are still in jail";
     setInterval(clearText, 1000);
+    //rollDice();
+  } else if (playerData[playerTurn].jailTerm > 0 && dice1 === dice2) {
+    comment.innerText = "You are free to go";
+    setInterval(clearText, 1000);
+    // movePlayers();
+    playerData[playerTurn].convicted = false;
+    playerData[playerTurn].jailTerm = 0;
+    playerPos = playerData[playerTurn].position + dice1 + dice2;
+    if (playerPos > tilesData.length - 1) {
+      playerPos -= tilesData.length;
+      console.log("Pass Go");
+    }
 
-    fineBtn.style.backgroundColor = "red";
-    fineBtn.style.font = "white";
-    fineBtn.innerText = "Pay Fine";
-    passBtn.style.backgroundColor = "red";
-    passBtn.style.font = "white";
-    passBtn.innerText = "Pass";
+    tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+    playerData[playerTurn].position = playerPos;
+
+    //fineBtn.style.backgroundColor = "red";
+    //fineBtn.style.font = "white";
+    //fineBtn.innerText = "Pay Fine";
   } else if (playerData[playerTurn].jailTerm === 0) {
     playerData[playerTurn].convicted = false;
+    comment.innerText = "You are free to go";
+    setInterval(clearText, 1000);
+
+    playerPos = playerData[playerTurn].position + dice1 + dice2;
+    if (playerPos > tilesData.length - 1) {
+      playerPos -= tilesData.length;
+      console.log("Pass Go");
+    }
+
+    tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+    playerData[playerTurn].position = playerPos;
   }
 }
 
@@ -660,7 +672,7 @@ const restartBtn = document.createElement("button");
 
 function turnCheck() {
   turn++;
-  if (turn >= 100) {
+  if (turn >= 200) {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
@@ -682,16 +694,15 @@ playBtn.addEventListener("click", () => {
   play();
 });
 
-roll.addEventListener("click", () => checkJailTerm());
-
 fineBtn.addEventListener("click", () => fine());
-passBtn.addEventListener("click", () => pass());
 
 roll.addEventListener("click", () => checkPlayerTurn());
 
 roll.addEventListener("click", () => rollDice());
+roll.addEventListener("click", () => movePlayers());
+roll.addEventListener("click", () => checkJailTerm());
 
-roll.addEventListener("click", () => goJail());
+//roll.addEventListener("click", () => goJail());
 
 roll.addEventListener("click", () => buyProperty());
 
