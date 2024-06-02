@@ -9,30 +9,30 @@
 
 .playerBStat {
   background-color: yellow;
-  font-size: 15px;
+  font-size: 20px;
   grid-column: 13/14;
   grid-row: 9/10;
   text-align: center;
   border: 1px solid;
-  height: 15px;
-  width: 230px;
+  height: 25px;
+  width: 300px;
 }
 
 .playerAStat {
   background-color: red;
-  font-size: 15px;
+  font-size: 20px;
   grid-row: 9/10;
   grid-column: 1/2;
   text-align: center;
   border: 1px solid;
-  height: 15px;
-  width: 230px;
+  height: 25px;
+  width: 300px;
 }
 
 .comment {
   background-color: #bfdbae;
   grid-column: 6/9;
-  grid-row: 5/8;
+  grid-row: 4/9;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
@@ -266,7 +266,6 @@
   grid-row: 1/2;
   margin-left: 8px;
   /* display: relative; */
-  align-self: flex-end;
   position: relative;
 }
 
@@ -289,7 +288,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 1px;
+  padding-bottom: 50px;
 }
 
 .deedTag {
@@ -297,22 +296,24 @@
   color: white;
   width: 120px;
   margin-left: 15px;
+  padding-bottom: 8px;
 }
 
 .buyBtn {
-  grid-row: 7/8;
+  grid-row: 6/7;
   grid-column: 6/7;
-  margin-top: 40px;
   background-color: red;
-  color: white;
+  color: #bfdbae;
   border-radius: 10px;
+  border: none;
 }
 .skipBtn {
-  grid-row: 7/8;
+  grid-row: 6/7;
   grid-column: 8/9;
   background-color: red;
   color: white;
   border-radius: 10px;
+  border: none;
 }
 
 .gameTitle {
@@ -325,12 +326,13 @@
 
 .info {
   border-radius: 10px;
+  font-size: 15px;
   border: 1px solid black;
   width: 120px;
-  height: 100px;
+  height: 90px;
   text-align: center;
   grid-column: 6/9;
-  margin-top: 2px;
+  margin-top: 10px;
   margin-left: 14px;
   background-color: #bfdbae;
 }
@@ -363,6 +365,7 @@
   border-radius: 10px;
   height: 30px;
   width: 60px;
+  position: relative;
 }
 
 .fineBtn {
@@ -620,8 +623,13 @@
   grid-row: 2/3;
 }
 
-.playerA {
-}
-
-.playerB {
+.deedCard {
+  border: solid 1px black;
+  background-color: white;
+  grid-column: 6/9;
+  grid-row: 4/8;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1px;
 }

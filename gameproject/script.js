@@ -65,6 +65,7 @@ const tilesData = [
   },
   {
     tile: a1,
+    name: "Raffles",
     deed: true,
     rent: 2,
     price: 60,
@@ -85,6 +86,7 @@ const tilesData = [
   },
   {
     tile: a3,
+    name: "City Hall",
     deed: true,
     rent: 4,
     price: 60,
@@ -115,6 +117,7 @@ const tilesData = [
   },
   {
     tile: a6,
+    name: "Dhoby Ghaut",
     deed: true,
     rent: 6,
     price: 100,
@@ -135,6 +138,7 @@ const tilesData = [
   },
   {
     tile: a8,
+    name: "Somerset",
     deed: true,
     rent: 6,
     price: 100,
@@ -145,6 +149,7 @@ const tilesData = [
   },
   {
     tile: a9,
+    name: "Orchard",
     deed: true,
     rent: 8,
     price: 120,
@@ -165,9 +170,10 @@ const tilesData = [
   },
   {
     tile: a11,
+    name: "Newton",
     deed: true,
-    rent: 140,
-    price: 10,
+    rent: 10,
+    price: 140,
     position: 11,
     ownBy: "",
     readyToRent: "no",
@@ -185,6 +191,7 @@ const tilesData = [
   },
   {
     tile: a13,
+    name: "Novena",
     deed: true,
     rent: 10,
     price: 140,
@@ -195,6 +202,7 @@ const tilesData = [
   },
   {
     tile: a14,
+    name: "TPY",
     deed: true,
     rent: 12,
     price: 160,
@@ -215,6 +223,7 @@ const tilesData = [
   },
   {
     tile: a16,
+    name: "Braddell",
     deed: true,
     rent: 14,
     price: 180,
@@ -235,6 +244,7 @@ const tilesData = [
   },
   {
     tile: a18,
+    name: "Bishan",
     deed: true,
     rent: 14,
     price: 180,
@@ -255,6 +265,7 @@ const tilesData = [
   },
   {
     tile: a20,
+    name: "AMK",
     deed: true,
     rent: 18,
     price: 220,
@@ -275,6 +286,7 @@ const tilesData = [
   },
   {
     tile: a22,
+    name: "YCK",
     deed: true,
     rent: 18,
     price: 220,
@@ -285,6 +297,7 @@ const tilesData = [
   },
   {
     tile: a23,
+    name: "Khatib",
     deed: true,
     rent: 20,
     price: 240,
@@ -305,6 +318,7 @@ const tilesData = [
   },
   {
     tile: a25,
+    name: "Yishun",
     deed: true,
     rent: 22,
     price: 260,
@@ -315,6 +329,7 @@ const tilesData = [
   },
   {
     tile: a26,
+    name: "Canberra",
     deed: true,
     rent: 22,
     price: 260,
@@ -335,6 +350,7 @@ const tilesData = [
   },
   {
     tile: a28,
+    name: "SBW",
     deed: true,
     rent: 22,
     price: 280,
@@ -355,6 +371,7 @@ const tilesData = [
   },
   {
     tile: a30,
+    name: "Admiralty",
     deed: true,
     rent: 26,
     price: 300,
@@ -365,6 +382,7 @@ const tilesData = [
   },
   {
     tile: a31,
+    name: "Woodlands",
     deed: true,
     rent: 26,
     price: 300,
@@ -385,6 +403,7 @@ const tilesData = [
   },
   {
     tile: a33,
+    name: "Marsiling",
     deed: true,
     rent: 28,
     price: 320,
@@ -415,6 +434,7 @@ const tilesData = [
   },
   {
     tile: a36,
+    name: "Kranji",
     deed: true,
     rent: 35,
     price: 350,
@@ -425,6 +445,7 @@ const tilesData = [
   },
   {
     tile: a37,
+    name: "YewTee",
     deed: true,
     rent: 50,
     price: 400,
@@ -439,7 +460,8 @@ const playerData = [
   {
     idx: 0,
     name: playerA,
-    bank: 500,
+    tag: "PlayerA",
+    bank: 1500,
     Deed: 0,
     Asset: 100,
     player: 0,
@@ -450,7 +472,8 @@ const playerData = [
   {
     indx: 1,
     name: playerB,
-    bank: 500,
+    tag: "PlayerB",
+    bank: 1500,
     Deed: 0,
     Assest: 1000,
     player: 1,
@@ -494,17 +517,6 @@ const chestCard = [
   { name: "Won 2nd prize in beauty contest! Collect $11", payment: 11, idx: 9 },
 ];
 
-// const win3property = [
-//   [a1, a3],
-//   [a6, a8, a9],
-//   [a11, a13, a14],
-//   [a16, a18],
-//   [a20, a22, a23],
-//   [a25, a26, a28],
-//   [a30, a31, a33],
-//   [a36, a37],
-// ];
-
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -520,8 +532,6 @@ function play() {
     isGameRunning = true;
     playBtn.remove();
     a0.appendChild(playerA, playerB);
-
-    //playerPos = 0;
 
     playerA.innerHTML = `<img class="playerA" src="images/m.png" alt="player piece" />`;
     playerB.innerHTML = `<img class="playerB" src="images/pikachu.png" alt="player piece" />`;
@@ -584,8 +594,39 @@ function movePlayers() {
   }
 }
 
+const buyBtn = document.createElement("button");
+const skipBtn = document.createElement("button");
+
 // player will get to buy property
 function buyProperty() {
+  if (
+    tilesData[playerPos].deed === true &&
+    playerData[playerTurn].bank >= tilesData[playerPos].price
+  ) {
+    comment.innerHTML = `<div class="deedCard">
+    <div class="deedTag">${tilesData[playerPos].name}</div>
+      <div class="info">
+        <p>Price $${tilesData[playerPos].price}</p>
+        <p>Rent $${tilesData[playerPos].rent}</p>
+      </div>`;
+
+    buyBtn.innerText = "Buy";
+    buyBtn.classList.add("buyBtn");
+
+    skipBtn.innerText = "Skip";
+    skipBtn.classList.add("skipBtn");
+
+    comment.appendChild(buyBtn);
+    comment.appendChild(skipBtn);
+  } else if (
+    tilesData[playerPos].deed === true &&
+    playerData[playerTurn].bank < tilesData[playerPos].price
+  ) {
+    comment.innerText = "You do not have enough to purchase this property";
+  }
+}
+
+function buy() {
   if (
     tilesData[playerPos].deed === true &&
     playerData[playerTurn].bank >= tilesData[playerPos].price
@@ -601,7 +642,6 @@ function buyProperty() {
     console.log("check if own by is updated", tilesData[playerPos]);
     console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos].deed);
-    //setTimeout(clearText, 1500);
     playerData[playerTurn].Deed++;
     playerData[playerTurn].bank -= tilesData[playerPos].price;
     tilesData[playerPos].price = 0;
@@ -609,13 +649,18 @@ function buyProperty() {
     playerData[
       playerTurn
     ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-  } else if (
-    tilesData[playerPos].deed === true &&
-    playerData[playerTurn].bank < tilesData[playerPos].price
-  ) {
-    comment.innerText = "You do not have enough to purchase this property";
-    //setTimeout(clearText, 1500);
+
+    comment.innerHTML = "";
+    comment.innerText = `It is ${playerData[playerTurn].tag}'s turn!`;
+    buyBtn.remove();
+    skipBtn.remove();
   }
+}
+function skip() {
+  comment.innerHTML = "";
+  comment.innerText = `It is ${playerData[playerTurn].tag}'s turn!`;
+  buyBtn.remove();
+  skipBtn.remove();
 }
 
 function checkIfReadyToRent() {
@@ -624,7 +669,6 @@ function checkIfReadyToRent() {
     tilesData[playerPos].deed = "ready to rent";
   } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
     comment.innerText = "You do not have enough to pay rent";
-    //setTimeout(clearText, 1500);
   } else if (
     tilesData[playerPos].deed === "ready to rent" &&
     playerData[playerTurn].name !== tilesData[playerPos].ownBy
@@ -640,7 +684,6 @@ function payRent() {
   playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
   playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
   comment.innerText = `You have paid rent. $${tilesData[playerPos].rent} deducted!`;
-  //setTimeout(clearText, 1500);
   console.log("rent deducted");
 }
 
@@ -721,19 +764,22 @@ const restartBtn = document.createElement("button");
 
 function turnCheck() {
   turn++;
-  if (turn >= 200) {
+  if (turn >= 100) {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
     comment.innerText = "";
     comment.innerText = "Game end";
+    if (playerData[0].bank > playerData[1].bank) {
+      comment.innerText = "PLAYER A WIN";
+    } else if (playerData[0].bank < playerData[1].bank) {
+      comment.innerText = "PLAYER B WIN";
+    }
     board.appendChild(restartBtn);
     roll.remove();
     isGameRunning = false;
   }
 }
-
-function passGo() {}
 
 function drawChance() {
   if (
@@ -749,7 +795,6 @@ function drawChance() {
         playerTurn
       ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
       comment.innerText = `You drew chance card! ${chanceCards[shuffle].name}, $${chanceCards[shuffle].payment} was credited to your bank`;
-      //setTimeout(clearText, 1000);
       console.log("drew chance", chanceCards);
     }
   }
@@ -791,7 +836,6 @@ function drawChest() {
       ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
       comment.innerText = `You drew chest card! ${chestCard[shuffle].name},
       `;
-      //setTimeout(clearText, 1000);
       console.log("drew chance", chestCard);
     }
   }
@@ -803,23 +847,17 @@ function restartGame() {
   }
 }
 
-playBtn.addEventListener("click", () => {
-  play();
-});
-
-fineBtn.addEventListener("click", () => fine());
-
-//roll.addEventListener("click", () => checkPlayerTurn());
-
+playBtn.addEventListener("click", () => play());
+//fineBtn.addEventListener("click", () => fine());
 roll.addEventListener("click", () => rollDice());
 roll.addEventListener("click", () => movePlayers());
 //roll.addEventListener("click", () => checkJailTerm());
 roll.addEventListener("click", () => drawChance());
 roll.addEventListener("click", () => drawChest());
-
 //roll.addEventListener("click", () => goJail());
 roll.addEventListener("click", () => buyProperty());
 roll.addEventListener("click", () => turnCheck());
 roll.addEventListener("click", () => checkIfReadyToRent());
-
+buyBtn.addEventListener("click", () => buy());
+skipBtn.addEventListener("click", () => skip());
 restartBtn.addEventListener("click", () => restartGame());
