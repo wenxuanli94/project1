@@ -488,15 +488,15 @@ const playerData = [
 
 const chanceCards = [
   { Title: "chance card selection" },
-  { name: "Bankerror", payment: 50, idx: 1 },
-  { name: "Stock sale", payment: 50, idx: 2 },
-  { name: "Its your birthday!", payment: 10, idx: 3 },
-  { name: "Life insurance matures", payment: 50, idx: 4 },
-  { name: "Hospital fees", payment: -100, idx: 5 },
-  { name: "School fees", payment: -50, idx: 6 },
-  { name: "Consultancy fee", payment: -25, idx: 7 },
-  { name: "Beauty contest", payment: 10, idx: 8 },
-  { name: "Inheritance", payment: 100, idx: 9 },
+  { name: "Bankerror, collect $50", payment: 50, idx: 1 },
+  { name: "Stock sale! Collect $50", payment: 50, idx: 2 },
+  { name: "Its your birthday! Collect $10", payment: 10, idx: 3 },
+  { name: "Life insurance matures! Collect $50", payment: 50, idx: 4 },
+  { name: "Hospital fees! $100 deducted", payment: -100, idx: 5 },
+  { name: "School fees! $50 deducted", payment: -50, idx: 6 },
+  { name: "Consultancy fee! Pay $25", payment: -25, idx: 7 },
+  { name: "Beauty contest! Win $10", payment: 10, idx: 8 },
+  { name: "Inheritance! Collect $100", payment: 100, idx: 9 },
 ];
 
 const chestCard = [
@@ -662,6 +662,7 @@ function checkIfReadyToRent() {
   if (tilesData[playerPos].deed === "taken") {
     console.log("this is checking if property is taken");
     tilesData[playerPos].deed = "ready to rent";
+    payRent();
   } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
     comment.innerText = "You do not have enough to pay rent";
   } else if (
@@ -717,7 +718,7 @@ function drawChance() {
       playerData[
         playerTurn
       ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-      comment.innerText = `You drew chance card! ${chanceCards[shuffle].name}, $${chanceCards[shuffle].payment} was credited to your bank`;
+      comment.innerText = `You drew chance card! ${chanceCards[shuffle].name}`;
       console.log("drew chance", chanceCards);
     }
   }
@@ -757,7 +758,7 @@ function drawChest() {
       playerData[
         playerTurn
       ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
-      comment.innerText = `You drew chest card! ${chestCard[shuffle].name},
+      comment.innerText = `You drew chest card! ${chestCard[shuffle].name}
       `;
       console.log("drew chance", chestCard);
     }
@@ -778,6 +779,7 @@ roll.addEventListener("click", () => drawChest());
 roll.addEventListener("click", () => buyProperty());
 roll.addEventListener("click", () => turnCheck());
 roll.addEventListener("click", () => checkIfReadyToRent());
+//roll.addEventListener("click", () => payRent());
 buyBtn.addEventListener("click", () => buy());
 skipBtn.addEventListener("click", () => skip());
 restartBtn.addEventListener("click", () => restartGame());
