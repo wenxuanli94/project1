@@ -4,6 +4,7 @@ const playerA = document.querySelector(".playerA");
 const playerBStat = document.querySelector(".playerBStat");
 const playerAStat = document.querySelector(".playerAStat");
 
+const diceUpdate = document.querySelector(".diceUpdate");
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
 const roll = document.querySelector(".roll");
@@ -565,6 +566,7 @@ function rollDice() {
   dice1 = Math.floor(Math.random() * 6 + 1);
   dice2 = Math.floor(Math.random() * 6 + 1);
   console.log("Dice rolled", dice1, dice2);
+  diceUpdate.innerText = `Rolled ${dice1} & ${dice2}!`;
 }
 
 function movePlayers() {
