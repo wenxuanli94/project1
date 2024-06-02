@@ -1,14 +1,20 @@
 const playerB = document.querySelector(".playerB");
 const playerA = document.querySelector(".playerA");
-//let player = playerA;
+
+const playerBStat = document.querySelector(".playerBStat");
+const playerAStat = document.querySelector(".playerAStat");
+
+const comment = document.querySelector(".comment");
+const playBtn = document.querySelector(".playBtn");
+const roll = document.querySelector(".roll");
+const fineBtn = document.querySelector(".fineBtn");
+const passBtn = document.querySelector(".passBtn");
+
 let playerPos = 0;
-//let player0 = 0
-//let player1 = 1
 let playerTurn = 1;
 let opponent = 0;
 let isGameRunning = false;
 let turn = 0;
-// const payRentBtn = document.createElement("button");
 const board = document.querySelector(".container");
 const a0 = document.querySelector(".a0");
 const a1 = document.querySelector(".a1");
@@ -48,9 +54,6 @@ const a34 = document.querySelector(".a34");
 const a35 = document.querySelector(".a35");
 const a36 = document.querySelector(".a36");
 const a37 = document.querySelector(".a37");
-
-const playerBStat = document.querySelector(".playerBStat");
-const playerAStat = document.querySelector(".playerAStat");
 
 const tilesData = [
   {
@@ -460,7 +463,7 @@ const playerData = [
   {
     idx: 0,
     name: playerA,
-    tag: "PlayerA",
+    tag: "Mario",
     bank: 1500,
     Deed: 0,
     Asset: 100,
@@ -472,7 +475,7 @@ const playerData = [
   {
     indx: 1,
     name: playerB,
-    tag: "PlayerB",
+    tag: "Pikachu",
     bank: 1500,
     Deed: 0,
     Assest: 1000,
@@ -516,12 +519,6 @@ const chestCard = [
   { name: "Pay your insurance premium $50", payment: 50, idx: 8 },
   { name: "Won 2nd prize in beauty contest! Collect $11", payment: 11, idx: 9 },
 ];
-
-const comment = document.querySelector(".comment");
-const playBtn = document.querySelector(".playBtn");
-const roll = document.querySelector(".roll");
-const fineBtn = document.querySelector(".fineBtn");
-const passBtn = document.querySelector(".passBtn");
 
 //game starts
 function updatePlayerStats() {}
@@ -587,17 +584,15 @@ function movePlayers() {
 
     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
     playerData[playerTurn].position = playerPos;
-    //goJail();
 
     console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos]);
   }
 }
 
+// player will get to buy property
 const buyBtn = document.createElement("button");
 const skipBtn = document.createElement("button");
-
-// player will get to buy property
 function buyProperty() {
   if (
     tilesData[playerPos].deed === true &&
@@ -687,79 +682,7 @@ function payRent() {
   console.log("rent deducted");
 }
 
-function clearText() {
-  comment.innerText = "";
-}
-function sentToJail() {
-  a29.appendChild(playerData[playerTurn].name);
-}
-// function goJail() {
-//   if (
-//     tilesData[playerPos].deed === "jailTime" &&
-//     playerData[playerTurn].position === tilesData[playerPos].position
-//   ) {
-//     console.log("you are going to jail");
-//     comment.innerText = "You are going to jail";
-//     setTimeout(sentToJail, 1000);
-//     setTimeout(clearText, 1500);
-
-//     playerData[playerTurn].convicted = true;
-//     playerData[playerTurn].jailTerm = 4;
-//     playerData[playerTurn].position = 29;
-//   }
-// }
-
-// function fine() {
-//   if (playerData[opponent].bank >= 50) {
-//     playerData[opponent].bank -= 50;
-//   } else {
-//     comment.innerText = "You do not have enough cash, you have to pass";
-//   }
-// }
-
-//check if player is convicted
-// function checkJailTerm() {
-//   if (playerData[playerTurn].jailTerm > 0 && dice1 !== dice2) {
-//     playerData[playerTurn].jailTerm--;
-
-//     comment.innerText = "Jail time";
-//     setInterval(clearText, 1000);
-//     //rollDice();
-//   } else if (playerData[playerTurn].jailTerm > 0 && dice1 === dice2) {
-//     comment.innerText = "You are free to go";
-//     setInterval(clearText, 1000);
-//     // movePlayers();
-//     playerData[playerTurn].convicted = false;
-//     playerData[playerTurn].jailTerm = 0;
-//     playerPos = playerData[playerTurn].position + dice1 + dice2;
-//     if (playerPos > tilesData.length - 1) {
-//       playerPos -= tilesData.length;
-//       console.log("Pass Go");
-//     }
-
-//     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
-//     playerData[playerTurn].position = playerPos;
-
-//     //fineBtn.style.backgroundColor = "red";
-//     //fineBtn.style.font = "white";
-//     //fineBtn.innerText = "Pay Fine";
-//   } else if (playerData[playerTurn].jailTerm === 0) {
-//     playerData[playerTurn].convicted = false;
-//     comment.innerText = "You are free to go";
-//     setInterval(clearText, 1000);
-
-//     playerPos = playerData[playerTurn].position + dice1 + dice2;
-//     if (playerPos > tilesData.length - 1) {
-//       playerPos -= tilesData.length;
-//       console.log("Pass Go");
-//     }
-
-//     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
-//     playerData[playerTurn].position = playerPos;
-//   }
-// }
-
-//check number of check and end game
+//check number of turns and end game
 const restartBtn = document.createElement("button");
 
 function turnCheck() {
@@ -848,13 +771,10 @@ function restartGame() {
 }
 
 playBtn.addEventListener("click", () => play());
-//fineBtn.addEventListener("click", () => fine());
 roll.addEventListener("click", () => rollDice());
 roll.addEventListener("click", () => movePlayers());
-//roll.addEventListener("click", () => checkJailTerm());
 roll.addEventListener("click", () => drawChance());
 roll.addEventListener("click", () => drawChest());
-//roll.addEventListener("click", () => goJail());
 roll.addEventListener("click", () => buyProperty());
 roll.addEventListener("click", () => turnCheck());
 roll.addEventListener("click", () => checkIfReadyToRent());

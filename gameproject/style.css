@@ -296,7 +296,8 @@
   color: white;
   width: 120px;
   margin-left: 15px;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
 }
 
 .buyBtn {
