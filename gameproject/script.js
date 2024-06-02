@@ -439,7 +439,7 @@ const playerData = [
   {
     idx: 0,
     name: playerA,
-    bank: 1500,
+    bank: 500,
     Deed: 0,
     Asset: 100,
     player: 0,
@@ -450,7 +450,7 @@ const playerData = [
   {
     indx: 1,
     name: playerB,
-    bank: 1500,
+    bank: 500,
     Deed: 0,
     Assest: 1000,
     player: 1,
@@ -613,7 +613,7 @@ function buyProperty() {
     tilesData[playerPos].deed === true &&
     playerData[playerTurn].bank < tilesData[playerPos].price
   ) {
-    comment.innerText = "You do not have enough purchase this property";
+    comment.innerText = "You do not have enough to purchase this property";
     //setTimeout(clearText, 1500);
   }
 }
@@ -764,8 +764,10 @@ function drawChest() {
     const shuffle = Math.floor(Math.random() * 9 + 1);
     console.log(shuffle);
     if (shuffle === 2) {
-      playerData[playerTurn].bank *= chestCard[shuffle].payment;
-      playerData[opponent].bank *= 0.9;
+      playerData[playerTurn].bank += Math.round(
+        chestCard[shuffle].payment * playerData[opponent].bank
+      );
+      Math.round((playerData[opponent].bank *= 0.9));
       playerData[
         playerTurn
       ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;

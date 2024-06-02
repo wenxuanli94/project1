@@ -281,10 +281,58 @@
   position: relative;
 }
 
-.gameTitle {
+.deedCard {
+  border: solid 1px black;
+  background-color: white;
   grid-column: 6/9;
-  grid-row: 4/5;
+  grid-row: 4/8;
   text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.deedTag {
+  background-color: black;
+  color: white;
+  width: 120px;
+  margin-left: 15px;
+}
+
+.buyBtn {
+  grid-row: 7/8;
+  grid-column: 6/7;
+  margin-top: 40px;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+}
+.skipBtn {
+  grid-row: 7/8;
+  grid-column: 8/9;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+}
+
+.gameTitle {
+  font-size: 40px;
+  color: red;
+  grid-column: 5/10;
+  grid-row: 2/3;
+  text-align: center;
+}
+
+.info {
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 120px;
+  height: 100px;
+  text-align: center;
+  grid-column: 6/9;
+  margin-top: 2px;
+  margin-left: 14px;
+  background-color: #bfdbae;
 }
 
 .roll {
