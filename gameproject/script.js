@@ -2,6 +2,8 @@ const playerB = document.querySelector(".playerB");
 const playerA = document.querySelector(".playerA");
 //let player = playerA;
 let playerPos = 0;
+//let player0 = 0
+//let player1 = 1
 let playerTurn = 1;
 let opponent = 0;
 let isGameRunning = false;
@@ -64,8 +66,8 @@ const tilesData = [
   {
     tile: a1,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 2,
+    price: 60,
     position: 1,
     ownBy: "",
     readyToRent: "no",
@@ -73,7 +75,7 @@ const tilesData = [
   },
   {
     tile: a2,
-    deed: false,
+    deed: "Draw Chest",
     rent: 0,
     price: 100,
     position: 2,
@@ -84,8 +86,8 @@ const tilesData = [
   {
     tile: a3,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 4,
+    price: 60,
     position: 3,
     ownBy: "",
     readyToRent: "no",
@@ -114,7 +116,7 @@ const tilesData = [
   {
     tile: a6,
     deed: true,
-    rent: 50,
+    rent: 6,
     price: 100,
     position: 6,
     ownBy: "",
@@ -123,7 +125,7 @@ const tilesData = [
   },
   {
     tile: a7,
-    deed: false,
+    deed: "Draw Chance",
     rent: 0,
     price: 100,
     position: 7,
@@ -134,7 +136,7 @@ const tilesData = [
   {
     tile: a8,
     deed: true,
-    rent: 50,
+    rent: 6,
     price: 100,
     position: 8,
     ownBy: "",
@@ -144,8 +146,8 @@ const tilesData = [
   {
     tile: a9,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 8,
+    price: 120,
     position: 9,
     ownBy: "",
     readyToRent: "no",
@@ -164,8 +166,8 @@ const tilesData = [
   {
     tile: a11,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 140,
+    price: 10,
     position: 11,
     ownBy: "",
     readyToRent: "no",
@@ -184,8 +186,8 @@ const tilesData = [
   {
     tile: a13,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 10,
+    price: 140,
     position: 13,
     ownBy: "",
     readyToRent: "no",
@@ -194,8 +196,8 @@ const tilesData = [
   {
     tile: a14,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 12,
+    price: 160,
     position: 14,
     ownBy: "",
     readyToRent: "no",
@@ -214,8 +216,8 @@ const tilesData = [
   {
     tile: a16,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 14,
+    price: 180,
     position: 16,
     ownBy: "",
     readyToRent: "no",
@@ -223,7 +225,7 @@ const tilesData = [
   },
   {
     tile: a17,
-    deed: false,
+    deed: "Draw Chest",
     rent: 0,
     price: 100,
     position: 17,
@@ -234,8 +236,8 @@ const tilesData = [
   {
     tile: a18,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 14,
+    price: 180,
     position: 18,
     ownBy: "",
     readyToRent: "no",
@@ -254,8 +256,8 @@ const tilesData = [
   {
     tile: a20,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 18,
+    price: 220,
     position: 20,
     ownBy: "",
     readyToRent: "no",
@@ -263,7 +265,7 @@ const tilesData = [
   },
   {
     tile: a21,
-    deed: false,
+    deed: "Draw Chance",
     rent: 0,
     price: 100,
     position: 21,
@@ -274,8 +276,8 @@ const tilesData = [
   {
     tile: a22,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 18,
+    price: 220,
     position: 22,
     ownBy: "",
     readyToRent: "no",
@@ -284,8 +286,8 @@ const tilesData = [
   {
     tile: a23,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 20,
+    price: 240,
     position: 23,
     ownBy: "",
     readyToRent: "no",
@@ -304,8 +306,8 @@ const tilesData = [
   {
     tile: a25,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 22,
+    price: 260,
     position: 25,
     ownBy: "",
     readyToRent: "no",
@@ -314,8 +316,8 @@ const tilesData = [
   {
     tile: a26,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 22,
+    price: 260,
     position: 26,
     ownBy: "",
     readyToRent: "no",
@@ -334,8 +336,8 @@ const tilesData = [
   {
     tile: a28,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 22,
+    price: 280,
     position: 28,
     ownBy: "",
     readyToRent: "no",
@@ -354,8 +356,8 @@ const tilesData = [
   {
     tile: a30,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 26,
+    price: 300,
     position: 30,
     ownBy: "",
     readyToRent: "no",
@@ -364,8 +366,8 @@ const tilesData = [
   {
     tile: a31,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 26,
+    price: 300,
     position: 31,
     ownBy: "",
     readyToRent: "no",
@@ -373,7 +375,7 @@ const tilesData = [
   },
   {
     tile: a32,
-    deed: false,
+    deed: "Draw Chest",
     rent: 0,
     price: 100,
     position: 32,
@@ -384,8 +386,8 @@ const tilesData = [
   {
     tile: a33,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 28,
+    price: 320,
     position: 33,
     ownBy: "",
     readyToRent: "no",
@@ -403,7 +405,7 @@ const tilesData = [
   },
   {
     tile: a35,
-    deed: false,
+    deed: "Draw Chance",
     rent: 0,
     price: 100,
     position: 35,
@@ -414,8 +416,8 @@ const tilesData = [
   {
     tile: a36,
     deed: true,
-    rent: 50,
-    price: 100,
+    rent: 35,
+    price: 350,
     position: 36,
     ownBy: "",
     readyToRent: "no",
@@ -425,7 +427,7 @@ const tilesData = [
     tile: a37,
     deed: true,
     rent: 50,
-    price: 100,
+    price: 400,
     position: 37,
     ownBy: "",
     readyToRent: "no",
@@ -458,16 +460,50 @@ const playerData = [
   },
 ];
 
-const win3property = [
-  [a1, a3],
-  [a6, a8, a9],
-  [a11, a13, a14],
-  [a16, a18],
-  [a20, a22, a23],
-  [a25, a26, a28],
-  [a30, a31, a33],
-  [a36, a37],
+const chanceCards = [
+  { Title: "chance card selection" },
+  { name: "Bankerror", payment: 50, idx: 1 },
+  { name: "Stock sale", payment: 50, idx: 2 },
+  { name: "Its your birthday!", payment: 10, idx: 3 },
+  { name: "Life insurance matures", payment: 50, idx: 4 },
+  { name: "Hospital fees", payment: -100, idx: 5 },
+  { name: "School fees", payment: -50, idx: 6 },
+  { name: "Consultancy fee", payment: -25, idx: 7 },
+  { name: "Beauty contest", payment: 10, idx: 8 },
+  { name: "Inheritance", payment: 100, idx: 9 },
 ];
+
+const chestCard = [
+  { name: "chest card selection" },
+  {
+    name: "You organize a bake sale for your local school. Collect $25.",
+    payment: 25,
+    idx: 1,
+  },
+  { name: "Everyone donate 10% cash to you!", payment: 0.1, idx: 2 },
+  {
+    name: "Grand Opera Opening! Collect $50 from each player",
+    payment: 50,
+    idx: 3,
+  },
+  { name: "Go to Raffles", payment: 0, idx: 4, position: 1 },
+  { name: "Life insurance matures. Collect $100", payment: 100, idx: 5 },
+  { name: "Pay fine $10", payment: 10, idx: 6 },
+  { name: "Pay school tax of $150", payment: 150, idx: 7 },
+  { name: "Pay your insurance premium $50", payment: 50, idx: 8 },
+  { name: "Won 2nd prize in beauty contest! Collect $11", payment: 11, idx: 9 },
+];
+
+// const win3property = [
+//   [a1, a3],
+//   [a6, a8, a9],
+//   [a11, a13, a14],
+//   [a16, a18],
+//   [a20, a22, a23],
+//   [a25, a26, a28],
+//   [a30, a31, a33],
+//   [a36, a37],
+// ];
 
 const comment = document.querySelector(".comment");
 const playBtn = document.querySelector(".playBtn");
@@ -476,6 +512,8 @@ const fineBtn = document.querySelector(".fineBtn");
 const passBtn = document.querySelector(".passBtn");
 
 //game starts
+function updatePlayerStats() {}
+
 function play() {
   if (!isGameRunning) {
     console.log(`game starts`);
@@ -483,7 +521,7 @@ function play() {
     playBtn.remove();
     a0.appendChild(playerA, playerB);
 
-    playerPos = 0;
+    //playerPos = 0;
 
     playerA.innerHTML = `<img class="playerA" src="images/m.png" alt="player piece" />`;
     playerB.innerHTML = `<img class="playerB" src="images/pikachu.png" alt="player piece" />`;
@@ -501,10 +539,12 @@ function checkPlayerTurn() {
     console.log("it is player B turn");
     playerTurn += 1;
     opponent -= 1;
+    comment.innerText = "";
   } else if (playerTurn === 1) {
     console.log("it is player A turn");
     playerTurn -= 1;
     opponent += 1;
+    comment.innerText = "";
   }
 }
 
@@ -513,7 +553,7 @@ let dice1 = 0;
 let dice2 = 0;
 function rollDice() {
   //Generate Random Dice
-
+  checkPlayerTurn();
   //const diceRoll = 1;
   dice1 = Math.floor(Math.random() * 6 + 1);
   dice2 = Math.floor(Math.random() * 6 + 1);
@@ -522,17 +562,22 @@ function rollDice() {
 
 function movePlayers() {
   if (playerData[playerTurn].convicted) {
-    return;
+    console.log("you are still convicted");
   } else if (!playerData[playerTurn].convicted) {
     playerPos = playerData[playerTurn].position + dice1 + dice2;
     if (playerPos > tilesData.length - 1) {
       playerPos -= tilesData.length;
       console.log("Pass Go");
+      comment.innerText = "You pass Go! Collect $200";
+      playerData[playerTurn].bank += 200;
+      playerData[
+        playerTurn
+      ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
     }
 
     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
     playerData[playerTurn].position = playerPos;
-    goJail();
+    //goJail();
 
     console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos]);
@@ -546,7 +591,7 @@ function buyProperty() {
     playerData[playerTurn].bank >= tilesData[playerPos].price
   ) {
     console.log("this should only appear when property is empty");
-    comment.innerText = "You have purchased this property!";
+    comment.innerText = `You have purchased this property! $${tilesData[playerPos].price} deducted!`;
     console.log("this property is available");
     tilesData[playerPos].tile.style.backgroundColor =
       playerData[playerTurn].color;
@@ -556,7 +601,7 @@ function buyProperty() {
     console.log("check if own by is updated", tilesData[playerPos]);
     console.log(playerData[playerTurn]);
     console.log(tilesData[playerPos].deed);
-    setTimeout(clearText, 1500);
+    //setTimeout(clearText, 1500);
     playerData[playerTurn].Deed++;
     playerData[playerTurn].bank -= tilesData[playerPos].price;
     tilesData[playerPos].price = 0;
@@ -569,7 +614,7 @@ function buyProperty() {
     playerData[playerTurn].bank < tilesData[playerPos].price
   ) {
     comment.innerText = "You do not have enough purchase this property";
-    setTimeout(clearText, 1500);
+    //setTimeout(clearText, 1500);
   }
 }
 
@@ -579,7 +624,7 @@ function checkIfReadyToRent() {
     tilesData[playerPos].deed = "ready to rent";
   } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
     comment.innerText = "You do not have enough to pay rent";
-    setTimeout(clearText, 1500);
+    //setTimeout(clearText, 1500);
   } else if (
     tilesData[playerPos].deed === "ready to rent" &&
     playerData[playerTurn].name !== tilesData[playerPos].ownBy
@@ -589,12 +634,14 @@ function checkIfReadyToRent() {
 }
 
 function payRent() {
+  console.log("pay rent");
   playerData[playerTurn].bank -= tilesData[playerPos].rent;
   playerData[opponent].bank += tilesData[playerPos].rent;
   playerAStat.innerText = `Bank: $${playerData[0].bank} Property: ${playerData[0].Deed}`;
   playerBStat.innerText = `Bank: $${playerData[1].bank} Property: ${playerData[1].Deed}`;
-  comment.innerText = "You have paid rent";
-  setTimeout(clearText, 1500);
+  comment.innerText = `You have paid rent. $${tilesData[playerPos].rent} deducted!`;
+  //setTimeout(clearText, 1500);
+  console.log("rent deducted");
 }
 
 function clearText() {
@@ -603,20 +650,21 @@ function clearText() {
 function sentToJail() {
   a29.appendChild(playerData[playerTurn].name);
 }
-function goJail() {
-  if (
-    tilesData[playerPos].deed === "jailTime" &&
-    playerData[playerTurn].position === tilesData[playerPos].position
-  ) {
-    comment.innerText = "You are going to jail";
-    setTimeout(sentToJail, 1000);
-    setTimeout(clearText, 1500);
+// function goJail() {
+//   if (
+//     tilesData[playerPos].deed === "jailTime" &&
+//     playerData[playerTurn].position === tilesData[playerPos].position
+//   ) {
+//     console.log("you are going to jail");
+//     comment.innerText = "You are going to jail";
+//     setTimeout(sentToJail, 1000);
+//     setTimeout(clearText, 1500);
 
-    playerData[playerTurn].convicted = true;
-    playerData[playerTurn].jailTerm = 4;
-    playerData[playerTurn].position = 29;
-  }
-}
+//     playerData[playerTurn].convicted = true;
+//     playerData[playerTurn].jailTerm = 4;
+//     playerData[playerTurn].position = 29;
+//   }
+// }
 
 // function fine() {
 //   if (playerData[opponent].bank >= 50) {
@@ -627,45 +675,46 @@ function goJail() {
 // }
 
 //check if player is convicted
-function checkJailTerm() {
-  if (playerData[playerTurn].jailTerm > 0 && dice1 !== dice2) {
-    playerData[playerTurn].jailTerm--;
-    comment.innerText = "You are still in jail";
-    setInterval(clearText, 1000);
-    //rollDice();
-  } else if (playerData[playerTurn].jailTerm > 0 && dice1 === dice2) {
-    comment.innerText = "You are free to go";
-    setInterval(clearText, 1000);
-    // movePlayers();
-    playerData[playerTurn].convicted = false;
-    playerData[playerTurn].jailTerm = 0;
-    playerPos = playerData[playerTurn].position + dice1 + dice2;
-    if (playerPos > tilesData.length - 1) {
-      playerPos -= tilesData.length;
-      console.log("Pass Go");
-    }
+// function checkJailTerm() {
+//   if (playerData[playerTurn].jailTerm > 0 && dice1 !== dice2) {
+//     playerData[playerTurn].jailTerm--;
 
-    tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
-    playerData[playerTurn].position = playerPos;
+//     comment.innerText = "Jail time";
+//     setInterval(clearText, 1000);
+//     //rollDice();
+//   } else if (playerData[playerTurn].jailTerm > 0 && dice1 === dice2) {
+//     comment.innerText = "You are free to go";
+//     setInterval(clearText, 1000);
+//     // movePlayers();
+//     playerData[playerTurn].convicted = false;
+//     playerData[playerTurn].jailTerm = 0;
+//     playerPos = playerData[playerTurn].position + dice1 + dice2;
+//     if (playerPos > tilesData.length - 1) {
+//       playerPos -= tilesData.length;
+//       console.log("Pass Go");
+//     }
 
-    //fineBtn.style.backgroundColor = "red";
-    //fineBtn.style.font = "white";
-    //fineBtn.innerText = "Pay Fine";
-  } else if (playerData[playerTurn].jailTerm === 0) {
-    playerData[playerTurn].convicted = false;
-    comment.innerText = "You are free to go";
-    setInterval(clearText, 1000);
+//     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+//     playerData[playerTurn].position = playerPos;
 
-    playerPos = playerData[playerTurn].position + dice1 + dice2;
-    if (playerPos > tilesData.length - 1) {
-      playerPos -= tilesData.length;
-      console.log("Pass Go");
-    }
+//     //fineBtn.style.backgroundColor = "red";
+//     //fineBtn.style.font = "white";
+//     //fineBtn.innerText = "Pay Fine";
+//   } else if (playerData[playerTurn].jailTerm === 0) {
+//     playerData[playerTurn].convicted = false;
+//     comment.innerText = "You are free to go";
+//     setInterval(clearText, 1000);
 
-    tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
-    playerData[playerTurn].position = playerPos;
-  }
-}
+//     playerPos = playerData[playerTurn].position + dice1 + dice2;
+//     if (playerPos > tilesData.length - 1) {
+//       playerPos -= tilesData.length;
+//       console.log("Pass Go");
+//     }
+
+//     tilesData[playerPos].tile.appendChild(playerData[playerTurn].name);
+//     playerData[playerTurn].position = playerPos;
+//   }
+// }
 
 //check number of check and end game
 const restartBtn = document.createElement("button");
@@ -676,6 +725,8 @@ function turnCheck() {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
+    comment.innerText = "";
+    comment.innerText = "Game end";
     board.appendChild(restartBtn);
     roll.remove();
     isGameRunning = false;
@@ -683,6 +734,66 @@ function turnCheck() {
 }
 
 function passGo() {}
+
+function drawChance() {
+  if (
+    tilesData[playerPos].deed === "Draw Chance" &&
+    playerData[playerTurn].position === tilesData[playerPos].position
+  ) {
+    console.log("draw chance");
+    const shuffle = Math.floor(Math.random() * 9 + 1);
+    console.log(shuffle);
+    if (shuffle === chanceCards[shuffle].idx) {
+      playerData[playerTurn].bank += chanceCards[shuffle].payment;
+      playerData[
+        playerTurn
+      ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+      comment.innerText = `You drew chance card! ${chanceCards[shuffle].name}, $${chanceCards[shuffle].payment} was credited to your bank`;
+      //setTimeout(clearText, 1000);
+      console.log("drew chance", chanceCards);
+    }
+  }
+}
+
+function drawChest() {
+  if (
+    tilesData[playerPos].deed === "Draw Chest" &&
+    playerData[playerTurn].position === tilesData[playerPos].position
+  ) {
+    console.log("draw chance");
+    const shuffle = Math.floor(Math.random() * 9 + 1);
+    console.log(shuffle);
+    if (shuffle === 2) {
+      playerData[playerTurn].bank *= chestCard[shuffle].payment;
+      playerData[opponent].bank *= 0.9;
+      playerData[
+        playerTurn
+      ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+      playerData[
+        opponent
+      ].startingStats.innerText = `Bank: $${playerData[opponent].bank} Property: ${playerData[opponent].Deed}`;
+      comment.innerText = `You drew chest card! ${chestCard[shuffle].name}`;
+      console.log("drew 10% donation");
+    } else if (shuffle === 4) {
+      a1.appendChild(playerData[playerTurn].name);
+      playerData[playerTurn].position = 1;
+      comment.innerText = `You drew chest card! ${chestCard[shuffle].name}. Pass Go! Collect $200`;
+      playerData[playerTurn].bank += 200;
+      playerData[
+        playerTurn
+      ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+    } else if (shuffle === chanceCards[shuffle].idx) {
+      playerData[playerTurn].bank += chestCard[shuffle].payment;
+      playerData[
+        playerTurn
+      ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+      comment.innerText = `You drew chest card! ${chestCard[shuffle].name},
+      `;
+      //setTimeout(clearText, 1000);
+      console.log("drew chance", chestCard);
+    }
+  }
+}
 
 function restartGame() {
   if (!isGameRunning) {
@@ -696,18 +807,17 @@ playBtn.addEventListener("click", () => {
 
 fineBtn.addEventListener("click", () => fine());
 
-roll.addEventListener("click", () => checkPlayerTurn());
+//roll.addEventListener("click", () => checkPlayerTurn());
 
 roll.addEventListener("click", () => rollDice());
 roll.addEventListener("click", () => movePlayers());
-roll.addEventListener("click", () => checkJailTerm());
+//roll.addEventListener("click", () => checkJailTerm());
+roll.addEventListener("click", () => drawChance());
+roll.addEventListener("click", () => drawChest());
 
 //roll.addEventListener("click", () => goJail());
-
 roll.addEventListener("click", () => buyProperty());
-
 roll.addEventListener("click", () => turnCheck());
-
 roll.addEventListener("click", () => checkIfReadyToRent());
 
 restartBtn.addEventListener("click", () => restartGame());
