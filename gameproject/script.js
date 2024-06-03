@@ -101,7 +101,7 @@ const tilesData = [
   },
   {
     tile: a4,
-    deed: false,
+    deed: "tax",
     rent: 0,
     price: 100,
     position: 4,
@@ -111,9 +111,9 @@ const tilesData = [
   },
   {
     tile: a5,
-    deed: false,
+    deed: "train",
     rent: 0,
-    price: 100,
+    price: 50,
     position: 5,
     ownBy: "",
     readyToRent: "no",
@@ -185,7 +185,7 @@ const tilesData = [
   },
   {
     tile: a12,
-    deed: false,
+    deed: "bill",
     rent: 0,
     price: 100,
     position: 12,
@@ -217,9 +217,9 @@ const tilesData = [
   },
   {
     tile: a15,
-    deed: false,
+    deed: "train",
     rent: 0,
-    price: 100,
+    price: 50,
     position: 15,
     ownBy: "",
     readyToRent: "no",
@@ -312,9 +312,9 @@ const tilesData = [
   },
   {
     tile: a24,
-    deed: false,
+    deed: "train",
     rent: 0,
-    price: 100,
+    price: 50,
     position: 24,
     ownBy: "",
     readyToRent: "no",
@@ -344,7 +344,7 @@ const tilesData = [
   },
   {
     tile: a27,
-    deed: false,
+    deed: "bill",
     rent: 0,
     price: 100,
     position: 27,
@@ -399,7 +399,7 @@ const tilesData = [
     tile: a32,
     deed: "Draw Chest",
     rent: 0,
-    price: 100,
+    price: 0,
     position: 32,
     ownBy: "",
     readyToRent: "no",
@@ -418,9 +418,9 @@ const tilesData = [
   },
   {
     tile: a34,
-    deed: false,
+    deed: "train",
     rent: 0,
-    price: 100,
+    price: 50,
     position: 34,
     ownBy: "",
     readyToRent: "no",
@@ -562,7 +562,8 @@ let dice2 = 0;
 function rollDice() {
   //Generate Random Dice
   checkPlayerTurn();
-  //const diceRoll = 1;
+  //dice1 = 0;
+  //dice2 = 1;
   dice1 = Math.floor(Math.random() * 6 + 1);
   dice2 = Math.floor(Math.random() * 6 + 1);
   console.log("Dice rolled", dice1, dice2);
@@ -570,9 +571,10 @@ function rollDice() {
 }
 
 function movePlayers() {
-  if (playerData[playerTurn].convicted) {
-    console.log("you are still convicted");
-  } else if (!playerData[playerTurn].convicted) {
+  if (playerData[playerTurn].inJail) {
+    console.log("you are still in jail!");
+    return;
+  } else if (!playerData[playerTurn].inJail) {
     playerPos = playerData[playerTurn].position + dice1 + dice2;
     if (playerPos > tilesData.length - 1) {
       playerPos -= tilesData.length;
@@ -648,7 +650,7 @@ function buy() {
     ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
 
     comment.innerHTML = "";
-    comment.innerText = `It is ${playerData[playerTurn].tag}'s turn!`;
+    comment.innerText = `It is ${playerData[opponent].tag}'s turn!`;
     buyBtn.remove();
     skipBtn.remove();
   }
@@ -661,17 +663,15 @@ function skip() {
 }
 
 function checkIfReadyToRent() {
-  if (tilesData[playerPos].deed === "taken") {
+  if (
+    tilesData[playerPos].deed === "taken" &&
+    playerData[playerTurn].name !== tilesData[playerPos].ownBy
+  ) {
     console.log("this is checking if property is taken");
     tilesData[playerPos].deed = "ready to rent";
     payRent();
   } else if (playerData[playerTurn].bank < tilesData[playerPos].rent) {
     comment.innerText = "You do not have enough to pay rent";
-  } else if (
-    tilesData[playerPos].deed === "ready to rent" &&
-    playerData[playerTurn].name !== tilesData[playerPos].ownBy
-  ) {
-    payRent();
   }
 }
 
@@ -690,7 +690,7 @@ const restartBtn = document.createElement("button");
 
 function turnCheck() {
   turn++;
-  if (turn >= 100) {
+  if (turn >= 50) {
     console.log("Game ends");
     restartBtn.innerText = "Restart";
     restartBtn.classList.add("restartBtn");
@@ -731,7 +731,7 @@ function drawChest() {
     tilesData[playerPos].deed === "Draw Chest" &&
     playerData[playerTurn].position === tilesData[playerPos].position
   ) {
-    console.log("draw chance");
+    console.log("draw chest");
     const shuffle = Math.floor(Math.random() * 9 + 1);
     console.log(shuffle);
     if (shuffle === 2) {
@@ -767,6 +767,36 @@ function drawChest() {
   }
 }
 
+function passByTrain() {
+  if (tilesData[playerPos].deed === "train") {
+    comment.innerText = `Paid for train! $50`;
+    playerData[playerTurn].bank -= tilesData[playerPos].price;
+    playerData[
+      playerTurn
+    ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+  }
+}
+
+function bill() {
+  if (tilesData[playerPos].deed === "bill") {
+    comment.innerText = `Pay your bills! $100`;
+    playerData[playerTurn].bank -= tilesData[playerPos].price;
+    playerData[
+      playerTurn
+    ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+  }
+}
+
+function tax() {
+  if (tilesData[playerPos].deed === "tax") {
+    comment.innerText = `Pay tax! $200`;
+    playerData[playerTurn].bank -= tilesData[playerPos].price;
+    playerData[
+      playerTurn
+    ].startingStats.innerText = `Bank: $${playerData[playerTurn].bank} Property: ${playerData[playerTurn].Deed}`;
+  }
+}
+
 function restartGame() {
   if (!isGameRunning) {
     location.reload();
@@ -776,12 +806,14 @@ function restartGame() {
 playBtn.addEventListener("click", () => play());
 roll.addEventListener("click", () => rollDice());
 roll.addEventListener("click", () => movePlayers());
+roll.addEventListener("click", () => passByTrain());
+roll.addEventListener("click", () => bill());
+roll.addEventListener("click", () => tax());
 roll.addEventListener("click", () => drawChance());
 roll.addEventListener("click", () => drawChest());
 roll.addEventListener("click", () => buyProperty());
 roll.addEventListener("click", () => turnCheck());
 roll.addEventListener("click", () => checkIfReadyToRent());
-//roll.addEventListener("click", () => payRent());
 buyBtn.addEventListener("click", () => buy());
 skipBtn.addEventListener("click", () => skip());
 restartBtn.addEventListener("click", () => restartGame());
