@@ -657,7 +657,7 @@ function buy() {
 }
 function skip() {
   comment.innerHTML = "";
-  comment.innerText = `It is ${playerData[playerTurn].tag}'s turn!`;
+  comment.innerText = `It is ${playerData[opponent].tag}'s turn!`;
   buyBtn.remove();
   skipBtn.remove();
 }
